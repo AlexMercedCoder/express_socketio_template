@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <input type="text" name="chat" />
+      <input type="submit" value="send" />
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+
+      //Submit Form
+      const form = document.querySelector("form");
+      const chat = document.querySelector("input[type='text']");
+      console.log(form, chat);
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        socket.emit("chat", chat.value);
+        chat.value = "";
+      });
+
+      socket.on("response", (value) => {
+          alert(value)
+      })
+    </script>
+  </body>
+</html>
