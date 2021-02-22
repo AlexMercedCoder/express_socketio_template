@@ -1,8 +1,17 @@
+///////////////////////////
+// Environmental Variables
+///////////////////////////
+require("./envfunc")();
+const {
+  PORT = 3000,
+  SECRET = "secret",
+  NODE_ENV = "development",
+} = process.env;
+const { log } = require("mercedlogger");
 const { app, http, io } = require("./routers/socket");
-const {PORT} = process.env
 
 //LISTENER
 
 http.listen(PORT, () => {
-  console.log(`Your are listening on port ${PORT}`);
+  log.green("Server Start", `Your are listening on port ${PORT}`);
 });
